@@ -1,14 +1,14 @@
+/**
+*@class AddBooksModal is a child of Library via the extends keyword
+*/
 class AddBooksModal extends Library {
+  //call to library class so that AddBooksModal instance has access to library methods
+  //initializes a AddBooksModal instance
   constructor() {
-    //Library.call(this); //resets context
     super();
-  }
-
-  init() {
     this._handleImageUpload();
     this._bindEvents();
   }
-
   //Use the function below to add cover art as a base64 encoded string
   //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
   //If you get stuck reference the documents in the link above
@@ -24,21 +24,24 @@ class AddBooksModal extends Library {
       return reader.readAsDataURL(file);
     }
   }
-
+  /**
+  *@private method
+  */
   _bindEvents() {
     $("#cover-add-input").on("change", $.proxy(this._handleImageUpload,this));
     $("#add-book-button").on("click", $.proxy(this._handleAddBooks, this));
     $("#queue-book-button").on("click", $.proxy(this._handleQueueBooks,this));
     $("#add-books-modal").on("hidden.bs.modal", $.proxy(this.clearInputFields,this));
   }
-
+  /**
+  *@private method will add books in if there are any in the queue or if the user simply clicks on add book button
+  */
   _handleAddBooks() {
 
     const queue = JSON.parse(localStorage.getItem('queueBooks'));
     if(queue.length !== 0) {
       this.addBooks(queue);
     }
-    //case of user clicking on add book button and none in queue
     if($("#title-add-input").val() && $("#author-add-input").val() && $("#pages-add-input").val() && $("#date-add-input").val()) {
       const title = $("#title-add-input").val();
       const author = $("#author-add-input").val();
@@ -48,17 +51,18 @@ class AddBooksModal extends Library {
       const synopsis = $("#synopsis-add-input").val();
       this._handleImageUpload();
       const cover = $('#addBookCoverImage').attr("src");
-      //var cover = $('#addBookCoverImage').attr("src");
 
       this.addBook(new Book({'title':title, 'author':author, 'rating':rating, 'numberOfPages': numberOfPages, 'publishDate':publishDate, 'synopsis':synopsis, 'cover': cover}));
 
     }
-    clearQueue();
+    clearQueue(); //method in util.js
     this.clearInputFields();
     this.setCounter([]);
     this.updateTableAfterAdd();
   }
-
+  /**
+  *@private method adds a book to the queue after queue book button clicked
+  */
   _handleQueueBooks(event) {
     event.preventDefault();
     if($("#title-add-input").val() && $("#author-add-input").val() && $("#pages-add-input").val() && $("#date-add-input").val()) {
@@ -83,7 +87,7 @@ class AddBooksModal extends Library {
     this.setCounter(arr);
     localStorage.setItem("queueBooks", JSON.stringify(arr));
   }
-
+  //sets the counter dynamically based on the number of books in the ready to add queue
   setCounter(arr) {
     $("#add-books-counter").html(arr.length);
   }
@@ -94,17 +98,14 @@ class AddBooksModal extends Library {
     $('#addBookCoverImage').attr('src','#')
     $('#cover-add-input').val('');
   }
-
+  //table is updated after adding in a book ---simialr to update table after remove -- move to util or consolidate ?
   updateTableAfterAdd() {
     const books = JSON.parse(localStorage.getItem('myLibrary'));
     this.handleEventTrigger("objUpdate",bookify(books));
   }
 }
-
-//Creates new library object
-// AddBooksModal.prototype = Object.create(Library.prototype);
-
+//DOM ready
 $(() => {
+  //call to AddBooksModal constructor to create a AddBooksModal instance
   window.AddBooksModal = new AddBooksModal();
-  window.AddBooksModal.init();
 });

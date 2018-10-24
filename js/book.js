@@ -7,6 +7,7 @@
 */
 class Book {
   constructor(oArgs) {
+    //these all need to be private, must create getters and setters
     this.cover = oArgs.cover;
     this.title = oArgs.title; //Required
     this.author = oArgs.author; //Required
@@ -15,14 +16,16 @@ class Book {
     //this.publishDate = new Date(String(oArgs.publishDate)).getUTCFullYear(); //Required
     this.publishDate = formatDate(new Date(String(oArgs.publishDate))); //required
     this.rating = oArgs.rating;
-    return this; //is this needed? 
+    return this; //is this needed?
   }
   /**
   * Takes an object that can have some or all of the fields {title,author,numPages} and edits the book using these fields
+  * @private
   * @param {Object} book
   * @return {Book} the edited book object
   */
-  editBook(oBook) {
+  _editBook(oBook) {
+    //since this will become private fields, must use getters and setters 
   //   //make sure the info is unique too
   //   //get the properities in the oBook
   //   var oBookProperties = oBook.entries();

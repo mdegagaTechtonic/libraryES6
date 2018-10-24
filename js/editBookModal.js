@@ -2,15 +2,12 @@ class editBookModal extends Library{
   constructor() {
     // Library.call(this); //resets context
     super();
+    this._bindEvents();
     this.index = "";
     this.book = "";
     this.$editForm = $("#edit-form-group");
     this.$saveChanges = this.$editForm.find("#save-changes-btn");
     this.$undoChanges = this.$editForm.find("#reset-changes"); //issues
-  }
-
-  init() {
-    this._bindEvents();
   }
 
   _bindEvents() {
@@ -83,10 +80,6 @@ class editBookModal extends Library{
   }
 }
 
-//Creates new library object
-// editBookModal.prototype = Object.create(Library.prototype);
-
 $(() => {
   window.editBookModal = new editBookModal();
-  window.editBookModal.init();
 });

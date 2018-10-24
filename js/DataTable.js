@@ -7,12 +7,8 @@
 
 class DataTable extends Library{
   constructor() {
-    //Library.call(this);
     super(); //goes to the Library class - inherits methods from the library class
     this.$container = $('#data-table');
-  }
-
-  init() {
     this._bindCustomListeners();
     this._updateStorage(); //all logic branches of _updateStorage call _updateTable, so this._updateTable is no longer necessary
   }
@@ -121,11 +117,9 @@ class DataTable extends Library{
   }
 }
 
-// DataTable.prototype = Object.create(Library.prototype);
 //This is the document ready that will create a new instance of DataTable
 //HINT: Each class||object will need a new instance to be initalized on document ready!
 $(() => {
   window.gDataTable = new DataTable();
-  window.gDataTable.init();
   localStorage.setItem("queueBooks","[]");
 });
