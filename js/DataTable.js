@@ -56,7 +56,8 @@ class DataTable extends Library{
 
   _createHead(book) {
     const tr = $('<tr>');
-    for (const key in book) {
+    for (let key in book) {
+      key = key.slice(1) //removes the _
       const th = $('<th>').text(spacesToCamelCase(key));
       if(key !== 'editBook') {
         tr.append(th);
@@ -71,7 +72,8 @@ class DataTable extends Library{
     const tr = $('<tr id="edit-book-row" data-toggle="modal" data-target="#edit-book-modal">');
     //This created our delete column
     const deleteInput = $('<input class="delete-book" type="checkbox">').attr('type', 'checkbox');
-    for(const key in book){
+    for(let key in book){
+      key = key.slice(1) //removes the _
       const td = $(`<td id=${key}>`);
       if (key === 'cover') {
         const img = $('<img>').addClass('tableImg').attr('src', book[key]);

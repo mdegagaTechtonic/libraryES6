@@ -38,7 +38,7 @@ class AddBooksModal extends Library {
   */
   _handleAddBooks() {
 
-    const queue = JSON.parse(localStorage.getItem('queueBooks'));
+    const queue = bookify(JSON.parse(localStorage.getItem('queueBooks')));
     if(queue.length !== 0) {
       this.addBooks(queue);
     }
