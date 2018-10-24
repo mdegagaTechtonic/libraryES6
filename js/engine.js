@@ -1,4 +1,4 @@
-/** 
+/**
  * @file The Library class that stores a collection of books
  * @author Merry Degaga
  * @version 10.24.2018

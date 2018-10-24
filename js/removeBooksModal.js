@@ -31,7 +31,7 @@ class RemoveBooksModal extends Library{
     this.updateTableAfterRemove(); //can this be moved to util / also any other methods in datatable that can be moved to util?
   }
   //delete via checkbox
-  dynamicDelete(event) {
+  dynamicDelete(event) { //issue - bookShelf is not updating after checkbox delete
     event.stopPropagation();
     this.index = event.target.parentNode.parentNode.sectionRowIndex;
     const title = event.target.parentNode.parentNode.childNodes[1].innerHTML;
