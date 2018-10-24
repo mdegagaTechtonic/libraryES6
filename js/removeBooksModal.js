@@ -1,11 +1,15 @@
+/**
+ * @file The Library class that stores a collection of books
+ * @author Merry Degaga
+ * @version 10.24.2018
+ */
+ //instead of using prototype, class keyword is used.
 class RemoveBooksModal extends Library{
+  //call to library class so that RemoveBooksModal instance has access to library methods
+  //initializes a RemoveBooksModal instance
   constructor() {
-    //Library.call(this); //resets context
     super();
     this.index;
-  }
-
-  init() {
     this._bindEvents();
   }
   /**
@@ -20,13 +24,13 @@ class RemoveBooksModal extends Library{
     $(document).on("click", ".close", $.proxy(this.unCheck, this));
     $("#checkbox-delete-modal").on("hidden.bs.modal", $.proxy(this.unCheck,this));
   }
-
+  //removes books and clears out the form and updates the table
   removeBooks() {
-    this.remove();
+    this.removeModal();
     this.clearInputFields();
-    this.updateTableAfterRemove();
+    this.updateTableAfterRemove(); //can this be moved to util / also any other methods in datatable that can be moved to util?
   }
-
+  //delete via checkbox
   dynamicDelete(event) {
     event.stopPropagation();
     this.index = event.target.parentNode.parentNode.sectionRowIndex;
@@ -36,29 +40,29 @@ class RemoveBooksModal extends Library{
       $("#checkbox-delete-modal").modal();
     };
   }
-
+  //after checkbox clicked, modal confirmation removes it from db
   removeFromDB() {
     const db = JSON.parse(localStorage.getItem("myLibrary"));
     db.splice(this.index,1);
     localStorage.setItem("myLibrary", JSON.stringify(db));
     this.handleEventTrigger("objUpdate",bookify(db));
   }
-
-  remove() {
+  //handles when remove book button clicked
+  removeModal() {
     const title = $("#title-remove-input").val();
     const author = $("#author-remove-input").val();
     if(title) {
-      RemoveBooksModal.removeBookByTitle(title);
+      this.removeBookByTitle(title);
     }
     if(author) {
-      RemoveBooksModal.removeBookByAuthor(author);
+      this.removeBookByAuthor(author);
     }
   }
-
+  //clears form fields
   clearInputFields() {
     $('.form-group input[type="text"]').val('');
   }
-
+  //unchecks delete box
   unCheck() {
     $('input[type=checkbox]').prop('checked',false);
   }
@@ -68,11 +72,8 @@ class RemoveBooksModal extends Library{
     this.handleEventTrigger("objUpdate", bookify(books));
   }
 }
-
-//Creates new library object
-// RemoveBooksModal.prototype = Object.create(Library.prototype);
-
+//DOM is ready
 $(() => {
+  //call to RemoveBooksModal constructor to create a RemoveBooksModal instance
   window.RemoveBooksModal = new RemoveBooksModal();
-  window.RemoveBooksModal.init();
 });

@@ -1,50 +1,38 @@
+/**
+ * @file The Library class that stores a collection of books
+ * @author Merry Degaga
+ * @version 10.24.2018
+ */
+ //instead of using prototype, class keyword is used.
 class ShowAuthorsModal extends Library{
+  //call to library class so that ShowAuthorsModal instance has access to library methods
+  //initializes a ShowAuthorsModal instance
   constructor() {
-  //Library.call(this); //resets context
   super();
+  this._bindEvents();
   }
-
-  init() {
-    this._bindEvents();
-  }
-
+ /**
+ *@private method binds events to various selectors
+ */
   _bindEvents() {
-    $("#show-authors-button").on("click", () => {
-      displayAuthors();
-    });
-    $("#author-close").on("click", clear);
-    $("#author-close1").on("click", clear); ///make this global method????
+    $("#show-authors-button").on("click", $.proxy(this.displayAuthors, this));
+    $("#author-close").on("click", $.proxy(this.clear,this));
+    $("#author-close1").on("click", $.proxy(this.clear,this)); ///make this global method????
   }
-
+  //dynamic append authors to the show authors modal
   displayAuthors() {
-    const authors = ShowAuthorsModal.getAuthors();
+    const authors = this.getAuthors();
     $.each(authors, (index, value) => {
       $("#authors").append(`<li>${value.author}</li>`);
     });
   }
-
+  //clears out the show authors modal
   clear() {
     $("#authors").empty();
   };
 }
-//Creates new library object
-// ShowAuthorsModal.prototype = Object.create(Library.prototype);
-
-// function displayAuthors() {
-//
-//   const authors = ShowAuthorsModal.getAuthors();
-//   console.log(authors);
-//   $.each(authors, (index, value) => {
-//     $("#authors").append(`<li>${value.author}</li>`);
-//   });
-// }
-
-// function clear() {
-//   $("#authors").empty();
-// }
-
+//DOM is ready
 $(() => {
   //call to ShowAuthorsModal constructor to create a ShowAuthorsModal instance
   window.ShowAuthorsModal = new ShowAuthorsModal();
-  window.ShowAuthorsModal.init();
 });

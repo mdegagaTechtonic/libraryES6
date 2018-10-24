@@ -3,7 +3,7 @@
  * @author Merry Degaga
  * @version 10.24.2018
  */
-
+ //instead of using prototype, class keyword is used.
 /**
 *@class creates a library with various functionalities
 */
@@ -188,7 +188,7 @@ class Library {
   }
 }
 
-//arrow function shorthand for when DOM is ready, a new library is created and a local storage is set 
+//arrow function shorthand for when DOM is ready, a new library is created and a local storage is set
 $(() => {
   window.myLibrary = new Library();
   window.bookShelf = window.bookList;

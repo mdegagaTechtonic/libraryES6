@@ -1,21 +1,26 @@
+/**
+ * @file The Library class that stores a collection of books
+ * @author Merry Degaga
+ * @version 10.24.2018
+ */
 //instead of using prototype, class keyword is used.
 class SuggestBooksModal extends Library{
+  //call to library class so that SuggestBooksModal instance has access to library methods
+  //initializes a SuggestBooksModal instance
   constructor() {
-    // Library.call(this); //resets context
     super();
-  }
-
-  init() {
     this._bindEvents();
   }
-
+  /**
+  *@private method to bind events
+  */
   _bindEvents() {
     $("#random-book-button").on("click", $.proxy(this.displayRandomBook,this));
     $("#close-randomBook").on("click", $.proxy(this.clearSuggestionBook, this));
     $("#close-suggestion").on("click", $.proxy(this.clearSuggestionBook, this));
     $("#book-display-modal").on("hidden.bs.modal", $.proxy(this.clearSuggestionBook,this));
   }
-
+  //displays a random book dynamically in html
   displayRandomBook(event) {
     const book = this.getRandomBook();
     $("#cover-suggest").append(`<div><img class='tableImg' src=${book.cover}></div>`)
@@ -26,7 +31,7 @@ class SuggestBooksModal extends Library{
     $("#info-suggest").append(`<p>Published on: ${book.publishDate}</p>`);
     this.displayStars(book);
   }
-
+  //move this to util
   displayStars(book) {
     for(let i=0; i<5; i++) {
       let $star = $('<span>').addClass('fa fa-star');
@@ -34,17 +39,14 @@ class SuggestBooksModal extends Library{
       $("#info-suggest").append($star);
     }
   }
-
+  //clears the suggest book modal
   clearSuggestionBook() {
     $("#cover-suggest").empty();
     $("#info-suggest").empty();
   }
 }
-
-//Creates new library object
-// SuggestBooksModal.prototype = Object.create(Library.prototype);
-
+//DOM is ready
 $(() => {
+  //call to SuggestBooksModal constructor to create a SuggestBooksModal instance
   window.SuggestBooksModal = new SuggestBooksModal();
-  window.SuggestBooksModal.init();
 });
