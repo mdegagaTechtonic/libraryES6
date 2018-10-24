@@ -1,6 +1,8 @@
-class SuggestBooksModal {
+//instead of using prototype, class keyword is used.
+class SuggestBooksModal extends Library{
   constructor() {
-    Library.call(this); //resets context
+    // Library.call(this); //resets context
+    super();
   }
 
   init() {
@@ -17,7 +19,6 @@ class SuggestBooksModal {
   displayRandomBook(event) {
     const book = this.getRandomBook();
     $("#cover-suggest").append(`<div><img class='tableImg' src=${book.cover}></div>`)
-
     $("#info-suggest").append(`<p>${book.title}</p>`);
     $("#info-suggest").append(`<p>By: ${book.author}</p>`);
     $("#info-suggest").append(`<p>Synopsis: ${book.synopsis}</p>`);
@@ -28,7 +29,7 @@ class SuggestBooksModal {
 
   displayStars(book) {
     for(let i=0; i<5; i++) {
-      const $star = $('<span>').addClass('fa fa-star');
+      let $star = $('<span>').addClass('fa fa-star');
       if(i<book.rating){ $star.addClass('checked'); }
       $("#info-suggest").append($star);
     }
@@ -41,7 +42,7 @@ class SuggestBooksModal {
 }
 
 //Creates new library object
-SuggestBooksModal.prototype = Object.create(Library.prototype);
+// SuggestBooksModal.prototype = Object.create(Library.prototype);
 
 $(() => {
   window.SuggestBooksModal = new SuggestBooksModal();

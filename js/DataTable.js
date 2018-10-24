@@ -1,6 +1,14 @@
-class DataTable {
+/**
+ * constructor caches the area to fill in book information
+ * @file The DataTable class creates the table containing books from local storage
+ * @author Merry Degaga
+ * @version 10.24.2018
+ */
+
+class DataTable extends Library{
   constructor() {
-    Library.call(this);
+    //Library.call(this);
+    super(); //goes to the Library class - inherits methods from the library class
     this.$container = $('#data-table');
   }
 
@@ -14,14 +22,10 @@ class DataTable {
     $(document).on('objUpdate', $.proxy(this._updateTable, this));
     //This is a global object that can be accessed as window.bookShelf. This will hold the state of your bookShelf.
     $("#show-books-button").on("click", $.proxy(this._showBooks, this));
-    // $('#show-books-button').on('click', function() {
-    //   var books = JSON.parse(localStorage.getItem('myLibrary'));
-    //   _self._makeTable(bookify(books));
-    // });
   }
 
   _showBooks() {
-    const books = JSON.parse(localStorage.getItem('myLibrary'));
+    let books = JSON.parse(localStorage.getItem('myLibrary'));
     this._makeTable(bookify(books));
   }
 
@@ -34,24 +38,19 @@ class DataTable {
         myObj[entry.name] = entry.value;
       }
     });
-    console.log(myObj);
     const searchResults = this.search(myObj);
     this.handleEventTrigger('objUpdate', searchResults);
-    console.log(searchResults);
     $('.form-group input[type="text"]').val('');
     return false;
   }
 
   _updateTable(e) {
-    //console.log(e);
-
     this._makeTable(e.detail);
   }
 
   _makeTable(books) {
     const _self = this;
     const $tbody = this.$container.find('tbody');
-    //var $tbody = $('#data-table').find('tbody');
     $tbody.empty();
     $('#books-table-head').html(this._createHead(new Book({})));
     $.each(books, (index, book) => {
@@ -122,8 +121,7 @@ class DataTable {
   }
 }
 
-DataTable.prototype = Object.create(Library.prototype);
-
+// DataTable.prototype = Object.create(Library.prototype);
 //This is the document ready that will create a new instance of DataTable
 //HINT: Each class||object will need a new instance to be initalized on document ready!
 $(() => {

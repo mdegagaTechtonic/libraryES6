@@ -1,6 +1,7 @@
-class AddBooksModal {
+class AddBooksModal extends Library {
   constructor() {
-    Library.call(this); //resets context
+    //Library.call(this); //resets context
+    super();
   }
 
   init() {
@@ -67,7 +68,7 @@ class AddBooksModal {
   }
 
   addBookToQueue() {
-    arr = JSON.parse(localStorage.getItem("queueBooks"));
+    let arr = JSON.parse(localStorage.getItem("queueBooks"));
 
     const title = $("#title-add-input").val();
     const author = $("#author-add-input").val();
@@ -101,7 +102,7 @@ class AddBooksModal {
 }
 
 //Creates new library object
-AddBooksModal.prototype = Object.create(Library.prototype);
+// AddBooksModal.prototype = Object.create(Library.prototype);
 
 $(() => {
   window.AddBooksModal = new AddBooksModal();

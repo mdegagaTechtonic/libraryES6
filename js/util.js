@@ -1,9 +1,11 @@
+//these functions are accessible by the other js files that are also loaded in the same html file as util.js
+
 function spacesToCamelCase(str)
 {
   const splits = str.split(/(?=[A-Z]+)/); //splits string parameter on capital letters
   const rejoined = splits.join(" "); //joins the split string array into a new string with spaces between elements
   const myArr = [];
-  for(i = 0;i < rejoined.length;i++)
+  for(let i = 0;i < rejoined.length;i++)
   if(i === 0){
     myArr.push(rejoined[i].toUpperCase()) //capitalizes first letter to turn camelcase into pascal case
   }else{
@@ -47,7 +49,7 @@ function formatDate(date) {
 
 //This is an extension
 Array.prototype.unique = function(key) {
-  const a = this.concat();
+  let a = this.concat();
   for(let i=0; i<a.length; ++i) {
     for(let j=i+1; j<a.length; ++j) {
       if(a[i][key] === a[j][key]) {

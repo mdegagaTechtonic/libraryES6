@@ -1,6 +1,7 @@
-class editBookModal {
+class editBookModal extends Library{
   constructor() {
-    Library.call(this); //resets context
+    // Library.call(this); //resets context
+    super();
     this.index = "";
     this.book = "";
     this.$editForm = $("#edit-form-group");
@@ -20,7 +21,7 @@ class editBookModal {
       $("#title-edit").css('color', 'DeepPink');
       //if the input field goes back to the original value then change color back to black
 
-    })
+    });
   }
 
   displayBook(event) {
@@ -60,8 +61,6 @@ class editBookModal {
           selector[0].defaultValue = new Date(oThat.book[key]).toISOString().slice(0,10);
         }
         else if(selector[0].id === "cover-edit") {
-          // console.log(book[key]);
-          // console.log(selector[0]);
           selector.attr("src", oThat.book[key]);
         }
         else {
@@ -85,7 +84,7 @@ class editBookModal {
 }
 
 //Creates new library object
-editBookModal.prototype = Object.create(Library.prototype);
+// editBookModal.prototype = Object.create(Library.prototype);
 
 $(() => {
   window.editBookModal = new editBookModal();

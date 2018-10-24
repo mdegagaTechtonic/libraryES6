@@ -1,4 +1,10 @@
 /*Constructor for Book class - no methods yet*/
+/**
+*The constructor creates an instance with the following properties
+*@class Creates a book object that can be edited
+*@param {Object} oArgs containing book information
+*@return {Book}
+*/
 class Book {
   constructor(oArgs) {
     this.cover = oArgs.cover;
@@ -9,10 +15,8 @@ class Book {
     //this.publishDate = new Date(String(oArgs.publishDate)).getUTCFullYear(); //Required
     this.publishDate = formatDate(new Date(String(oArgs.publishDate))); //required
     this.rating = oArgs.rating;
-    return this;
+    return this; //is this needed? 
   }
-
-  //edit book
   /**
   * Takes an object that can have some or all of the fields {title,author,numPages} and edits the book using these fields
   * @param {Object} book

@@ -1,3 +1,12 @@
+/**
+ * @file The Library class that stores a collection of books
+ * @author Merry Degaga
+ * @version 10.24.2018
+ */
+
+/**
+*@class creates a library with various functionalities
+*/
 class Library {
   handleEventTrigger(sEvent, oData) {
     var oData = oData || {};
@@ -7,6 +16,11 @@ class Library {
     }
   }
 
+  /**
+  * Adds a book to the library
+  * @param {Book} book
+  * @return {boolean} true if it was added in or false (because it is already in the library)
+  */
   addBook(book) {
     for(let i = 0; i < window.bookShelf.length; i++) {
       if(book.title.toLowerCase().trim() === window.bookShelf[i].title.toLowerCase().trim()){
@@ -20,6 +34,11 @@ class Library {
     return true;
   }
 
+  /**
+  * Removes a book by its title from the library
+  * @param {String} title
+  * @return {boolean} true if it was removed or false (because it is not in the library)
+  */
   removeBookByTitle(title) {
     for (let i = 0; i < window.bookShelf.length; i++) {
       if(window.bookShelf[i].title.toLowerCase() === title.toLowerCase()) {
@@ -31,7 +50,11 @@ class Library {
     }
     return false;
   }
-
+  /**
+  * Removes all books by the author's name from the library
+  * @param {String} authorName
+  * @return {boolean} true if they were removed or false (because they are not in the library)
+  */
   removeBookByAuthor(author) {
     let booksRemoved = false;
     for (let i = window.bookShelf.length - 1; i >= 0; i--) {
@@ -41,18 +64,23 @@ class Library {
         this.setStorage();
       }
     }
-
     return booksRemoved;
   }
-
+  /**
+  * Return a random book from the library
+  * @return {Book} or null if there are no books in the library
+  */
   getRandomBook() {
     if(window.bookShelf.length){
       return window.bookShelf[Math.floor(Math.random() * Math.floor(window.bookShelf.length))];
     }
-
     return null;
   }
-
+  /**
+  * Returns all books that completely and partially match the title
+  * @param {String} title
+  * @return {Array} of book Objects that match and partially match the title or an empty array if no books match or partially match
+  */
   getBookByTitle(title) {
     const matchedArr = [];
     for (let i = 0; i < window.bookShelf.length; i++) {
@@ -62,7 +90,11 @@ class Library {
     }
     return matchedArr;
   }
-
+  /**
+  * Returns all books that match and partially match the author's name
+  * @param {String} authorName
+  * @return {Array} of books Objects that match and partially match the author name or an empty array if no books match or partially match
+  */
   getBooksByAuthor(authorName) {
     const matchedArr = [];
     for (let i = 0; i < window.bookShelf.length; i++) {
@@ -72,7 +104,11 @@ class Library {
     }
     return matchedArr;
   }
-
+  /**
+  * Adds a collection of books to the library
+  * @param {Array} books
+  * @return {number} of books added in or zero if no books were added in
+  */
   addBooks(books) {
     let counter = 0;
     for (let i = 0; i < books.length; i++) {
@@ -83,14 +119,20 @@ class Library {
     this.setStorage();
     return counter;
   }
-
+  /**
+  * Returns the distinct authors' names from all books in the library
+  * @return {Array} of Strings of the names of all distinct authors or an empty array if no books exist or if no authors exist
+  */
   getAuthors() {
     if (window.bookShelf.length) {
       return window.bookShelf.unique("author");
     }
     return [];
   }
-
+  /**
+  * Returns a random author name from the library
+  * @return {String} author name or null if no books exist
+  */
   getRandomAuthorName() {
     if (!window.bookShelf.length) {
       return null;
@@ -119,7 +161,9 @@ class Library {
     console.log(found);
     return found.unique('title');
   }
-
+  /**
+  * @return {Array} of books in local storage
+  */
   getStorage() {
     const arr = [];
     const parsedObj = JSON.parse(localStorage.getItem("myLibrary"));
@@ -128,17 +172,23 @@ class Library {
     }
     return arr;
   }
-
+  /**
+  * Sets the local storage
+  * @return {log} alert
+  */
   setStorage() {
     localStorage.setItem('myLibrary', JSON.stringify(window.bookShelf));
     return console.log("STORAGE HAS BEEN SET");
   }
-
+  /**
+  * Calls the setStorage method
+  */
   init() {
     this.setStorage();
   }
 }
 
+//arrow function shorthand for when DOM is ready, a new library is created and a local storage is set 
 $(() => {
   window.myLibrary = new Library();
   window.bookShelf = window.bookList;
