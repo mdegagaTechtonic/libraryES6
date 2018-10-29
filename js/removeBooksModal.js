@@ -42,10 +42,13 @@ class RemoveBooksModal extends Library{
   }
   //after checkbox clicked, modal confirmation removes it from db
   removeFromDB() {
-    const db = JSON.parse(localStorage.getItem("myLibrary"));
-    db.splice(this.index,1);
-    localStorage.setItem("myLibrary", JSON.stringify(db));
-    this.handleEventTrigger("objUpdate",bookify(db));
+    //const db = JSON.parse(localStorage.getItem("myLibrary"));
+    //db.splice(this.index,1);
+    window.bookShelf.splice(this.index,1);
+    this.setStorage();
+    this.updateTableAfterRemove();
+    //localStorage.setItem("myLibrary", JSON.stringify(db));
+    //this.handleEventTrigger("objUpdate",bookify(db));
   }
   //handles when remove book button clicked
   removeModal() {

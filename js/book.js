@@ -7,71 +7,71 @@
 */
 class Book {
   constructor(oArgs) {
-    //these all need to be private, must create getters and setters
-    // this.cover = oArgs.cover;
-    // this.title = oArgs.title; //Required
-    // this.author = oArgs.author; //Required
-    // this.synopsis = oArgs.synopsis;
-    // this.numberOfPages = oArgs.numberOfPages //Required
-    // this.publishDate = formatDate(new Date(String(oArgs.publishDate))); //required
-    // this.rating = oArgs.rating;
-    // return this;
-    this._cover = oArgs.cover || oArgs._cover;
-    this._title = oArgs.title ||  oArgs._title; //Required
-    this._author = oArgs.author || oArgs._author; //Required
-    this._synopsis = oArgs.synopsis || oArgs._synopsis;
-    this._numberOfPages = oArgs.numberOfPages || oArgs._numberOfPages //Required
-    if(oArgs._publishDate) {
-      this._publishDate = formatDate(new Date(String(oArgs._publishDate)))
-    }
-    else {
-      this._publishDate = formatDate(new Date(String(oArgs.publishDate)))
-    }
-    this._rating = oArgs.rating || oArgs._rating;
-    return this; //is this needed?
-  }
+    // these all need to be private, must create getters and setters
+    this.cover = oArgs.cover;
+    this.title = oArgs.title; //Required
+    this.author = oArgs.author; //Required
+    this.synopsis = oArgs.synopsis;
+    this.numberOfPages = oArgs.numberOfPages //Required
+    this.publishDate = formatDate(new Date(String(oArgs.publishDate))); //required
+    this.rating = oArgs.rating;
+    return this;
+  //   this._cover = oArgs.cover || oArgs._cover;
+  //   this._title = oArgs.title ||  oArgs._title; //Required
+  //   this._author = oArgs.author || oArgs._author; //Required
+  //   this._synopsis = oArgs.synopsis || oArgs._synopsis;
+  //   this._numberOfPages = oArgs.numberOfPages || oArgs._numberOfPages //Required
+  //   if(oArgs._publishDate) {
+  //     this._publishDate = formatDate(new Date(String(oArgs._publishDate)))
+  //   }
+  //   else {
+  //     this._publishDate = formatDate(new Date(String(oArgs.publishDate)))
+  //   }
+  //   this._rating = oArgs.rating || oArgs._rating;
+  //   return this; //is this needed?
+  // }
 
-  get cover () {
-    return this._cover;
-  }
-  get title () {
-    return this._title;
-  }
-  get author () {
-    return this._author;
-  }
-  get synopsis () {
-    return this._synopsis;
-  }
-  get numberOfPages () {
-    return this._numberOfPages;
-  }
-  get publishDate () {
-    return this._publishDate;
-  }
-  get rating () {
-    return this._rating;
-  }
-  set cover (cover) {
-    this._cover = cover;
-  }
-  set title (title) {
-    this._title = title;
-  }
-  set author (author) {
-    this._author = author;
-  }
-  set synopsis (synopsis) {
-    this._synopsis = synopsis;
-  }
-  set numberOfPages (pages) {
-    this._numberOfPages = pages;
-  }
-  set publishDate (date) {
-    this._date = date;
-  }
-  set rating (rating) {
-    this._rating = rating;
+  // get cover () {
+  //   return this._cover;
+  // }
+  // get title () {
+  //   return this._title;
+  // }
+  // get author () {
+  //   return this._author;
+  // }
+  // get synopsis () {
+  //   return this._synopsis;
+  // }
+  // get numberOfPages () {
+  //   return this._numberOfPages;
+  // }
+  // get publishDate () {
+  //   return this._publishDate;
+  // }
+  // get rating () {
+  //   return this._rating;
+  // }
+  // set cover (cover) {
+  //   this._cover = cover;
+  // }
+  // set title (title) {
+  //   this._title = title;
+  // }
+  // set author (author) {
+  //   this._author = author;
+  // }
+  // set synopsis (synopsis) {
+  //   this._synopsis = synopsis;
+  // }
+  // set numberOfPages (pages) {
+  //   this._numberOfPages = pages;
+  // }
+  // set publishDate (date) {
+  //   this._date = date;
+  // }
+  // set rating (rating) {
+  //   this._rating = rating;
   }
 
 

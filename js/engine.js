@@ -98,7 +98,7 @@ class Library {
   getBooksByAuthor(authorName) {
     const matchedArr = [];
     for (let i = 0; i < window.bookShelf.length; i++) {
-      if(window.bookShelf[i].author.toLowerCase().search(authorName.toLowerCase()) >= 0){
+      if(window.bookShelf[i].author.toLowerCase().search(authorName.toLowerCase()) >= 0) {
         matchedArr.push(window.bookShelf[i]);
       }
     }
@@ -186,6 +186,19 @@ class Library {
   init() {
     this.setStorage();
   }
+
+  // updateStorage() {
+  //   if (window.localStorage.length > 0) {
+  //     console.log('BOOKSHELF EXISTS SETTING VALUE');
+  //     window.bookShelf = this.getStorage();
+  //     this.handleEventTrigger('objUpdate',window.bookShelf);
+  //   } else {
+  //     console.log('BOOKSHELF DOES NOT EXIST ADDING BOOKS!');
+  //     this.addBooks(bookify(bookList));
+  //     this.handleEventTrigger('objUpdate',window.bookShelf);
+  //     this.setStorage();
+  //   }
+  // }
 }
 
 //arrow function shorthand for when DOM is ready, a new library is created and a local storage is set
