@@ -187,6 +187,11 @@ class Library {
     this.setStorage();
   }
 
+  editStorage(index, editedBook) {
+    window.bookShelf.splice(index, 1, editedBook);
+    this.setStorage();
+  }
+
   // updateStorage() {
   //   if (window.localStorage.length > 0) {
   //     console.log('BOOKSHELF EXISTS SETTING VALUE');

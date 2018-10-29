@@ -97,7 +97,7 @@ class DataTable extends Library{
   _stars(rating) {
     const $div = $('<div>');
     let value = 0;
-    for(let i=0; i<=5; i++) {
+    for(let i=0; i<5; i++) {
       const $star = $('<span>').addClass('fa fa-star');
       if(i<rating){ $star.addClass('checked'); value++ }
       $div.append($star);
@@ -114,7 +114,7 @@ class DataTable extends Library{
     } else {
       console.log('BOOKSHELF DOES NOT EXIST ADDING BOOKS!');
       //this.addBooks(bookify(bookList));
-      this.addBooks(bookify(window.bookShelf)); 
+      this.addBooks(bookify(window.bookShelf));
       this.handleEventTrigger('objUpdate',window.bookShelf);
       this.setStorage();
     }

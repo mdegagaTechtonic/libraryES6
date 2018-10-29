@@ -39,7 +39,7 @@ function formatDate(date) {
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
 
-  const day = date.getDate();
+  const day = date.getUTCDate();
   const month = date.getMonth();
   const year = date.getFullYear();
 

@@ -87,7 +87,7 @@ class editBookModal extends Library{
 
       if(selector !== undefined) {
         if(selector[0].id === "publishDate-edit") {
-          updatedBook[key] = selector.value;
+          updatedBook[key] = selector[0].value;
         }
         else if(selector[0].id === "cover-edit") {
           updatedBook[key] = selector.attr('src');
@@ -100,7 +100,17 @@ class editBookModal extends Library{
     }
 
     this.book.editBook(updatedBook);
-    console.log("changes saved");
+    this.editStorage(this.index, updatedBook);
+    this.updateTableAfterEdit();
+    //update STORAGE
+    //update window
+    // console.log("changes saved");
+
+  }
+
+  updateTableAfterEdit() {
+    const books = JSON.parse(localStorage.getItem('myLibrary'));
+    this.handleEventTrigger("objUpdate", bookify(books));
   }
 }
 

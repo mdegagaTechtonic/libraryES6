@@ -82,7 +82,7 @@ class Book {
   * @param {Object} book
   * @return {Book} the edited book object
   */
-  _editBook(oBook) {
+  editBook(oBook) {
     //since this will become private fields, must use getters and setters
   //   //make sure the info is unique too
   //   //get the properities in the oBook
