@@ -78,7 +78,28 @@ class editBookModal extends Library{
 
   saveChanges() {
     //call edit book method
-    //alert('changes saved')
+    // let updatedBook = this.$editForm.serializeArray(); //serializeArray only returning the synopsis
+    const oThat = this;
+    let updatedBook = {};
+
+    for(const key in oThat.book) {
+      const selector = $(oThat.$editForm.find(`#${key}-edit`)[0]);
+
+      if(selector !== undefined) {
+        if(selector[0].id === "publishDate-edit") {
+          updatedBook[key] = selector.value;
+        }
+        else if(selector[0].id === "cover-edit") {
+          updatedBook[key] = selector.attr('src');
+        }
+        else {
+          updatedBook[key] = selector.val();
+        }
+        selector.css('color', 'Black');
+      }
+    }
+
+    this.book.editBook(updatedBook);
     console.log("changes saved");
   }
 }

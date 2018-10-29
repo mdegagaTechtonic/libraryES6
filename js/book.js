@@ -93,18 +93,18 @@ class Book {
   //     }
   //   }
   //
-  //   this.title = oBook.title || this.title;
-  //
-  //   this.author = oBook.author || this.author;
-  //
-  //   this.numPages = oBook.numPages || this.numPages;
-  //
-  //   this.rating = oBook.rating || this.rating;
-  //
-  //   this.synopsis = oBook.synopsis || this.synopsis;
-  //
-  //   this.cover = oBook.cover || this.cover;
-  //
-  //   return this;
+    this.title = oBook.title || this.title;
+
+    this.author = oBook.author || this.author;
+
+    this.numPages = oBook.numPages || this.numPages;
+
+    this.rating = oBook.rating || this.rating;
+
+    this.synopsis = oBook.synopsis || this.synopsis;
+
+    this.cover = oBook.cover || this.cover;
+
+    return this;
   }
 }
