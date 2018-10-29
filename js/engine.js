@@ -204,6 +204,6 @@ class Library {
 //arrow function shorthand for when DOM is ready, a new library is created and a local storage is set
 $(() => {
   window.myLibrary = new Library();
-  window.bookShelf = window.bookList;
+  //window.bookShelf = window.bookList;
   window.myLibrary.init();
 });

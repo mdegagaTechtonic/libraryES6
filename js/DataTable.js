@@ -113,7 +113,8 @@ class DataTable extends Library{
       this.handleEventTrigger('objUpdate',window.bookShelf);
     } else {
       console.log('BOOKSHELF DOES NOT EXIST ADDING BOOKS!');
-      this.addBooks(bookify(bookList));
+      //this.addBooks(bookify(bookList));
+      this.addBooks(bookify(window.bookShelf)); 
       this.handleEventTrigger('objUpdate',window.bookShelf);
       this.setStorage();
     }
