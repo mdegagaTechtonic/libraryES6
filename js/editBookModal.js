@@ -15,6 +15,7 @@ class editBookModal extends Library{
     $(document).on("click","#edit-book-row", $.proxy(this.displayBook, this));
     this.$saveChanges.on("click", $.proxy(this.saveChanges,this));
     this.$undoChanges.on("click", $.proxy(this.setForm,this));
+    $("#cover-edit-input").on("change", $.proxy(this.handleImageUpload,this));
     $("#publishDate-edit").on('input',()=> {
       $('#publishDate-edit').css('color', 'DeepPink');
 
@@ -111,6 +112,19 @@ class editBookModal extends Library{
   updateTableAfterEdit() {
     const books = JSON.parse(localStorage.getItem('myLibrary'));
     this.handleEventTrigger("objUpdate", bookify(books));
+  }
+
+  handleImageUpload() {
+    const preview = document.querySelector('#cover-edit');
+    const file = document.querySelector('input[name=edit]').files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      preview.src = reader.result; }, false);
+
+    if (file) {
+      return reader.readAsDataURL(file);
+    }
   }
 }
 
